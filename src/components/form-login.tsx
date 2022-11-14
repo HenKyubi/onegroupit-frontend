@@ -9,9 +9,7 @@ const FormLogin = () => {
     <div id="form__login">
       <h3 className="form__login-title">Enter your credentials</h3>
       <div className="form__login-email">
-        <label className="lab" htmlFor="email-input">
-          Email
-        </label>
+        <label htmlFor="email-input">Email Address</label>
         <input
           id="email-input"
           type="email"
@@ -21,25 +19,34 @@ const FormLogin = () => {
           required
         />
       </div>
-      <label>
-        Password
+      <div className="form__login-password">
+        <div className="form__login-password-title">
+          <label htmlFor="password-input">Password</label>
+          <a href="password-recovery">Forgot password?</a>
+        </div>
         <input
+          id="password-input"
           type="password"
           placeholder="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
-      </label>
-      <label>
-        Keep me signed in
+      </div>
+      <div className="form__login-remember-me">
         <input
+          id="rememberme-input"
           type="checkbox"
           checked={keepSession}
           onChange={() => setKeepSession(!keepSession)}
         />
-      </label>
-      <ButtonLogin username={email} password={password} />
-      <div>
+        <label htmlFor="rememberme-input">Keep me signed in</label>
+      </div>
+      <ButtonLogin
+        username={email}
+        password={password}
+        className="form__login-btn-login"
+      />
+      <div className="form__login-signup">
         <span>Not a member? </span>
         <a href="/register">Sign up</a>
       </div>

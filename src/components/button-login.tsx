@@ -7,11 +7,16 @@ const login = (username: string, password: string) => {
   } catch {}
 };
 
-const ButtonLogin: React.FC<{ username: string; password: string }> = ({
-  username,
-  password,
-}) => {
-  return <button onClick={() => login(username, password)}>LOGIN</button>;
+const ButtonLogin: React.FC<{
+  username: string;
+  password: string;
+  className: string;
+}> = ({ username, password, className }) => {
+  return (
+    <button className={className} onClick={() => login(username, password)}>
+      LOGIN
+    </button>
+  );
 };
 
 export default ButtonLogin;
