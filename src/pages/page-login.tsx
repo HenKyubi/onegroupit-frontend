@@ -2,7 +2,7 @@ import React from "react";
 import ButtonRegister from "../components/button-register";
 import FormLogin from "../components/form-login";
 import "../styles/page-login.scss";
-import datos from "../users.json";
+// import datos from "../users.json";
 import logo from '../assets/logo.png'
 
 const LoginPage = () => {
@@ -19,14 +19,14 @@ const LoginPage = () => {
         </div>
       </div>
       <div className="section__rigth">
-        <div className="section__rigth___register">
+        <div className="section__rigth-register">
           <span>No Employer account yet?</span>
-          <ButtonRegister />
+          <ButtonRegister className="btn-register"/>
         </div>
-        <div className="section__rigth___login">
+        <div className="section__rigth-login">
           <FormLogin />
         </div>
-        {JSON.stringify(datos)}
+        {/* {JSON.stringify(datos)} */}
       </div>
     </div>
   );

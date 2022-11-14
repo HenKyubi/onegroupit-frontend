@@ -7,16 +7,20 @@ const FormLogin = () => {
   const [keepSession, setKeepSession] = useState(false);
   return (
     <div id="form__login">
-      <div>Enter your credentials</div>
-      <label>
-        Email
+      <h3 className="form__login-title">Enter your credentials</h3>
+      <div className="form__login-email">
+        <label className="lab" htmlFor="email-input">
+          Email
+        </label>
         <input
+          id="email-input"
           type="email"
           placeholder="example@gmail.com"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
+          required
         />
-      </label>
+      </div>
       <label>
         Password
         <input
@@ -28,11 +32,16 @@ const FormLogin = () => {
       </label>
       <label>
         Keep me signed in
-        <input type="checkbox" checked={keepSession} onChange={()=>setKeepSession(!keepSession)} />
+        <input
+          type="checkbox"
+          checked={keepSession}
+          onChange={() => setKeepSession(!keepSession)}
+        />
       </label>
       <ButtonLogin username={email} password={password} />
       <div>
-        <span>Not a member? </span><a href="/register">Sign up</a>
+        <span>Not a member? </span>
+        <a href="/register">Sign up</a>
       </div>
     </div>
   );
