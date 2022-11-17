@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 // import userAvatar from "../assets/logo.png";
+import { FaSearch, FaPlus, FaBell } from "react-icons/fa";
 const Navbar = () => {
   // const style= {
 
@@ -16,13 +17,27 @@ const Navbar = () => {
         boxShadow: "0px 2px 30px -16.43541717529297px #00000026",
       }}
     >
-      <div className="searchbar">
-        <i className="gg-search"></i>
+      <div
+        className="searchbar"
+        style={{
+          border: "1px solid #A2A3A433",
+          borderRadius: "4px",
+          boxShadow: "0px 2px 30px -16.43541717529297px #00000026",
+          padding: "5px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <FaSearch
+          style={{
+            color: "#A2A3A4",
+          }}
+        />
         <input
           style={{
-            border: "1px solid #A2A3A433",
-            borderRadius: "4px",
+            border: "none",
             padding: "5px",
+            outline: "none",
           }}
           type="text"
           placeholder="Search"
@@ -30,7 +45,14 @@ const Navbar = () => {
           onChange={(e) => setSearchInput(e.target.value)}
         />
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          // width: "25%",
+        }}
+      >
         <button
           style={{
             border: "none",
@@ -40,25 +62,28 @@ const Navbar = () => {
             padding: "8px 16px",
             fontWeight: "500",
             fontSize: "16px",
+            display: "flex",
+            justifyContent: "space-between",
           }}
         >
+          <FaPlus />
           NEW
         </button>
-        <i>notification</i>
+        <FaBell style={{ color: "#3F444E" }} />
         <span>userName</span>
-        {/* <div
+        <div
           style={{
+            boxShadow: "0px 2px 4px 0px #00000040",
             borderRadius: "50%",
             height: "100%",
-            width: "100%",
           }}
         >
-          <img
+          {/* <img
             src={userAvatar}
             alt="name of user avatar"
-            style={{ objectFit: 'cover' }}
-          />
-        </div> */}
+            style={{ height: "100%" }}
+          /> */}
+        </div>
       </div>
     </nav>
   );
