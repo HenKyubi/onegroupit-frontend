@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ButtonLogin from "./button-login";
 
 const FormLogin = () => {
@@ -48,7 +49,7 @@ const FormLogin = () => {
       />
       <div className="form__login-signup">
         <span>Not a member? </span>
-        <a href="/register">Sign up</a>
+        <Link to={`register`}>Sign up</Link>
       </div>
     </div>
   );

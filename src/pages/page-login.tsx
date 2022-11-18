@@ -5,7 +5,7 @@ import "../styles/page-login.scss";
 // import datos from "../users.json";
 import logo from '../assets/logo.png'
 
-const LoginPage = () => {
+const PageLogin = () => {
   return (
     <div id="page__login">
       <div className="section__left">
@@ -32,4 +32,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default PageLogin;
