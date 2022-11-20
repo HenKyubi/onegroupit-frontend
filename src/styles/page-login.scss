@@ -1,6 +1,6 @@
 #page__login {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
 
   .section__left {
@@ -10,8 +10,10 @@
     height: 100%;
     background-color: #248aff;
     color: white;
-    // padding-top: 2%;
-    // padding-left: 5%;
+    box-sizing: border-box;
+    padding-left: 3em;
+    padding-top: 1em;
+
     .section__left-logo {
       height: 10%;
       img {
@@ -19,6 +21,7 @@
         height: 100%;
       }
     }
+
     .section__left-welcome {
       height: 100%;
       display: flex;
@@ -29,12 +32,16 @@
       }
     }
   }
+
   .section__rigth {
     width: 75%;
     height: 100%;
-    // padding-top: 2%;
+    box-sizing: border-box;
+    padding-right: 3em;
+    padding-top: 1em;
+
     .section__rigth-register {
-      height: 5%;
+      height: 4%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -46,18 +53,24 @@
       }
       .btn-register {
         width: 15%;
+        height: 100%;
         border: 1px solid #248aff;
         border-radius: 6px;
         background-color: #ffffff;
         color: #248aff;
         font-size: 18px;
         font-weight: 500;
-        padding: 4px 10px;
+
+        &:hover {
+          transition: all 0.5s;
+          color: #ffffff;
+          background-color: #248aff;
+        }
       }
     }
     .section__rigth-login {
       width: 100%;
-      height: 95%;
+      height: 96%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -86,8 +99,6 @@
             border-radius: 4px;
             outline: none;
             padding: 10px;
-            // height: 40px;
-            // color: #4a4844;
             ::placeholder {
               color: #c4c4c4;
             }
@@ -115,8 +126,6 @@
             border-radius: 4px;
             outline: none;
             padding: 10px;
-            // height: 40px;
-            // color: #4a4844;
             ::placeholder {
               color: #c4c4c4;
             }
@@ -141,13 +150,18 @@
           }
         }
         .form__login-btn-login {
-          border: none;
+          border: 1px #248aff solid;
           border-radius: 6px;
-          background-color: #248aff;
           padding: 10px;
+          background-color: #248aff;
           color: #ffffff;
           font-weight: 700;
           font-size: 20px;
+          &:hover {
+            transition: all 0.5s;
+            color: #248aff;
+            background-color: #ffffff;
+          }
         }
         .form__login-signup {
           padding-top: 42px;
