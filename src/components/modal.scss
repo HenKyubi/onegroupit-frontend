@@ -1,0 +1,31 @@
+.modal {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  opacity: 0.75;
+  display: none;
+  &.isOpen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.modal__container {
+  position: relative;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 20%;
+  min-height: 20%;
+  // border: ;
+}
+
+.modal__close {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useModal } from "../hooks/useModal";
 import ButtonLogin from "./button-login";
+import Modal from "./modal";
 
 const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [keepSession, setKeepSession] = useState(false);
+  const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
+
   return (
     <div id="form__login">
       <h3 className="form__login-title">Enter your credentials</h3>
@@ -49,8 +52,17 @@ const FormLogin = () => {
       />
       <div className="form__login-signup">
         <span>Not a member? </span>
-        <Link to={`register`}>Sign up</Link>
+        <span
+          className="form__login-signup-signup"
+          onClick={setRegisterModalIsOpen}
+        >
+          Sign up
+        </span>
       </div>
+      <Modal
+        isOpen={registerModalIsOpen}
+        toggleModal={setRegisterModalIsOpen}
+      ></Modal>
     </div>
   );
 };

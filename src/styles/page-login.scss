@@ -168,12 +168,15 @@
           font-size: 17px;
           font-weight: 500;
           color: #4a4844;
-          a {
+          &-signup {
             color: #248aff;
             font-size: 17px;
             font-weight: 500;
             font-family: "Manrope";
             text-decoration: none;
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }

@@ -3,9 +3,12 @@ import ButtonRegister from "../components/button-register";
 import FormLogin from "../components/form-login";
 import "../styles/page-login.scss";
 // import datos from "../users.json";
-import logo from '../assets/logo.png'
+import logo from "../assets/logo.png";
+import { useModal } from "../hooks/useModal";
+import ModalRegister from "../components/modal-register";
 
 const PageLogin = () => {
+  const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
   return (
     <div id="page__login">
       <div className="section__left">
@@ -21,13 +24,20 @@ const PageLogin = () => {
       <div className="section__rigth">
         <div className="section__rigth-register">
           <span>No Employer account yet?</span>
-          <ButtonRegister className="btn-register"/>
+          <ButtonRegister
+            className="btn-register"
+            onClick={setRegisterModalIsOpen}
+          />
         </div>
         <div className="section__rigth-login">
           <FormLogin />
         </div>
         {/* {JSON.stringify(datos)} */}
       </div>
+      <ModalRegister
+        isOpen={registerModalIsOpen}
+        toggleModal={setRegisterModalIsOpen}
+      />
     </div>
   );
 };

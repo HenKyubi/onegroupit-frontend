@@ -1,14 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-const ButtonRegister: React.FC<{ className?: string }> = ({ className }) => {
-  const navigate = useNavigate();
-  const handleAction = () => {
-    navigate("/register");
-  };
+const ButtonRegister: React.FC<{
+  className?: string;
+  onClick?: () => void;
+}> = ({ className, onClick }) => {
+  // const navigate = useNavigate();
+  // const handleAction = () => {
+  //   navigate("/register");
+  // };
 
   return (
-    <button className={className} onClick={handleAction}>
+    <button className={className} onClick={onClick}>
       Register
     </button>
   );

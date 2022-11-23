@@ -1,5 +1,29 @@
-.box__centred{
+.box__centred {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn__primary {
+  border: 1px #248aff solid;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #248aff;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  &:hover {
+    transition: all 0.5s;
+    color: #248aff;
+    background-color: #ffffff;
+  }
+}
+
+.pb-1{
+  box-sizing: border-box;
+  padding-bottom: 0.5rem;
+}
+
+.textAlignCenter{
+  text-align: center;
 }
