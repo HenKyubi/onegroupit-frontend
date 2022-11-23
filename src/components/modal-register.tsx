@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { FaUserCircle, FaLock, FaEnvelope } from "react-icons/fa";
 import Modal from "./modal";
+
+type FormRegister = {
+  firstName: string;
+  lastName: string;
+  password: string;
+  repeatPassword: string;
+  email: string;
+};
 
 const ModalRegister: React.FC<{
   isOpen: boolean;
   toggleModal: () => void;
 }> = ({ isOpen, toggleModal }) => {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [repeatPassword, setRepeatPassword] = useState<string>("");
-
-  // const [firstName, setFirstName] = useState<string>("");
-  const handleSubmit = () => {
-    if(password === repeatPassword){
-
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<FormRegister>();
+  const onSubmit = (data: FormRegister) => {
+    if (data.password === data.repeatPassword) {
+      console.log("ok");
+    }else{
+      
     }
-  }
+  };
 
   return (
     <Modal isOpen={isOpen} toggleModal={toggleModal}>
-      <div
+      <form
+        onSubmit={handleSubmit(onSubmit)}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -34,7 +44,7 @@ const ModalRegister: React.FC<{
         <div className="pb-1">
           <div
             style={{
-              border: "1px #000000 solid",
+              border: "1px #c4c4c4 solid",
               borderRadius: "6px",
               height: "100%",
               width: "100%",
@@ -46,8 +56,7 @@ const ModalRegister: React.FC<{
             <input
               type="text"
               placeholder="First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              {...register("firstName", { required: true, maxLength: 50 })}
               style={{
                 width: "100%",
                 border: "none",
@@ -63,6 +72,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
+                color: '#248aff'
               }}
             />
           </div>
@@ -70,7 +80,7 @@ const ModalRegister: React.FC<{
         <div className="pb-1">
           <div
             style={{
-              border: "1px #000000 solid",
+              border: "1px #c4c4c4 solid",
               borderRadius: "6px",
               height: "100%",
               width: "100%",
@@ -82,8 +92,7 @@ const ModalRegister: React.FC<{
             <input
               type="text"
               placeholder="Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              {...register("lastName", { required: true, max: 50, min: 1 })}
               style={{
                 width: "100%",
                 border: "none",
@@ -99,6 +108,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
+                color: '#248aff'
               }}
             />
           </div>
@@ -106,7 +116,7 @@ const ModalRegister: React.FC<{
         <div className="pb-1">
           <div
             style={{
-              border: "1px #000000 solid",
+              border: "1px #c4c4c4 solid",
               borderRadius: "6px",
               height: "100%",
               width: "100%",
@@ -118,8 +128,7 @@ const ModalRegister: React.FC<{
             <input
               type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
               style={{
                 width: "100%",
                 border: "none",
@@ -135,48 +144,15 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
+                color: '#248aff'
               }}
             />
           </div>
         </div>
-        {/* <div className="pb-1">
-          <div
-            style={{
-              border: "1px #000000 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Phone"
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
-            />
-            <FaPhone
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-              }}
-            />
-          </div>
-        </div> */}
         <div className="pb-1">
           <div
             style={{
-              border: "1px #000000 solid",
+              border: "1px #c4c4c4 solid",
               borderRadius: "6px",
               height: "100%",
               width: "100%",
@@ -188,8 +164,7 @@ const ModalRegister: React.FC<{
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password", { required: true })}
               style={{
                 width: "100%",
                 border: "none",
@@ -205,6 +180,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
+                color: '#248aff'
               }}
             />
           </div>
@@ -212,7 +188,7 @@ const ModalRegister: React.FC<{
         <div className="pb-1">
           <div
             style={{
-              border: "1px #000000 solid",
+              border: "1px #c4c4c4 solid",
               borderRadius: "6px",
               height: "100%",
               width: "100%",
@@ -224,8 +200,7 @@ const ModalRegister: React.FC<{
             <input
               type="password"
               placeholder="Repeat Password"
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
+              {...register("repeatPassword", { required: true })}
               style={{
                 width: "100%",
                 border: "none",
@@ -241,14 +216,17 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
+                color: '#248aff'
               }}
             />
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button className="btn__primary" onClick={handleSubmit}>Submit</button>
+          <input className="btn__primary" type={"submit"} value="Submit" />
+          {/* Submit
+          </input> */}
         </div>
-      </div>
+      </form>
     </Modal>
   );
 };
