@@ -34,6 +34,7 @@ const FormRegister: React.FC<{
       ).then((res) => {
         if (res.message === "User registred") {
           reset();
+          toggleModal();
           toastSuccess(res.message);
         } else {
           toastError(res.message);
@@ -46,198 +47,61 @@ const FormRegister: React.FC<{
 
   return (
     <Modal isOpen={isOpen} toggleModal={toggleModal}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="form__register">
         <div className="pb-1">
           <h1 className="textAlignCenter">Sign up</h1>
         </div>
         <div className="pb-1">
-          <div
-            style={{
-              border: "1px #c4c4c4 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="form__register-box-input">
             <input
               type="text"
               placeholder="First Name"
               {...register("firstName", { required: true, maxLength: 50 })}
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
             />
-            <FaUserCircle
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-                color: "#248aff",
-              }}
-            />
+            <FaUserCircle />
           </div>
         </div>
         <div className="pb-1">
-          <div
-            style={{
-              border: "1px #c4c4c4 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="form__register-box-input">
             <input
               type="text"
               placeholder="Last Name"
               {...register("lastName", { required: true, max: 50, min: 1 })}
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
             />
-            <FaUserCircle
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-                color: "#248aff",
-              }}
-            />
+            <FaUserCircle />
           </div>
         </div>
         <div className="pb-1">
-          <div
-            style={{
-              border: "1px #c4c4c4 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="form__register-box-input">
             <input
               type="email"
               placeholder="Email"
               {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
             />
-            <FaEnvelope
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-                color: "#248aff",
-              }}
-            />
+            <FaEnvelope />
           </div>
         </div>
         <div className="pb-1">
-          <div
-            style={{
-              border: "1px #c4c4c4 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="form__register-box-input">
             <input
               type="password"
               placeholder="Password"
               {...register("password", { required: true })}
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
             />
-            <FaLock
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-                color: "#248aff",
-              }}
-            />
+            <FaLock />
           </div>
         </div>
         <div className="pb-1">
-          <div
-            style={{
-              border: "1px #c4c4c4 solid",
-              borderRadius: "6px",
-              height: "100%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <div className="form__register-box-input">
             <input
               type="password"
               placeholder="Repeat Password"
               {...register("repeatPassword", { required: true })}
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                fontSize: "1rem",
-                fontWeight: "500",
-                padding: "0.5rem",
-              }}
-              required
             />
-            <FaLock
-              style={{
-                paddingRight: "0.5rem",
-                fontSize: "1.5rem",
-                fontWeight: "500",
-                color: "#248aff",
-              }}
-            />
+            <FaLock />
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="form__register-box-btn-submit">
           <input className="btn__primary" type={"submit"} value="Submit" />
         </div>
         <ToastContainer autoClose={1500} />

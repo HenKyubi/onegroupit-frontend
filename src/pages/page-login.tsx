@@ -1,10 +1,7 @@
-import "../styles/page-login.scss";
-
 //Hooks
 import { useModal } from "../hooks/useModal";
 
 //Components
-import ButtonRegister from "../components/button-register";
 import FormLogin from "../components/form-login";
 import FormRegister from "../components/form-register";
 
@@ -28,10 +25,9 @@ const PageLogin = () => {
       <div className="section__rigth">
         <div className="section__rigth-register">
           <span>No Employer account yet?</span>
-          <ButtonRegister
-            className="btn-register"
-            onClick={setRegisterModalIsOpen}
-          />
+          <button className="btn__secondary" onClick={setRegisterModalIsOpen}>
+            Register
+          </button>
         </div>
         <div className="section__rigth-login">
           <FormLogin />

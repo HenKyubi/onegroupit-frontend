@@ -1,9 +1,8 @@
-import React from "react";
+//Components
 import Navbar from "../components/navbar";
 import Product from "../components/product";
-import "../styles/page-products.scss";
 
-//image
+//Assets
 import photo from "../assets/laptop.jpg";
 const PageProducts = () => {
   return (

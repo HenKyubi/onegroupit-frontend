@@ -51,22 +51,6 @@
         font-weight: 500;
         padding-right: 10px;
       }
-      .btn-register {
-        width: 15%;
-        height: 100%;
-        border: 1px solid #248aff;
-        border-radius: 6px;
-        background-color: #ffffff;
-        color: #248aff;
-        font-size: 18px;
-        font-weight: 500;
-
-        &:hover {
-          transition: all 0.5s;
-          color: #ffffff;
-          background-color: #248aff;
-        }
-      }
     }
     .section__rigth-login {
       width: 100%;
