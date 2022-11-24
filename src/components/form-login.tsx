@@ -1,16 +1,53 @@
-import React, { useState } from "react";
+import { useContext } from "react";
+//Context
+import { AppContext } from "../context/app/app-context";
+
+//Toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//Hooks
+import { useForm } from "react-hook-form";
 import { useModal } from "../hooks/useModal";
-import ButtonLogin from "./button-login";
+
+//API
+import { login } from "../api";
+
+//Components
 import Modal from "./modal";
 
+//Types
+type formLogin = {
+  email: string;
+  password: string;
+  keepMeSignedIn: boolean;
+};
+
 const FormLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [keepSession, setKeepSession] = useState(false);
+  const { appState } = useContext(AppContext);
+
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<formLogin>();
+
+  const onSubmit = async (data: formLogin) => {
+    await login(data.email, data.password).then((res) => {
+      if (res.token === null) {
+        const toastError = () => toast.error(res.message);
+        toastError();
+      } else {
+        // appState.token;
+        console.log(res.token);
+      }
+    });
+  };
+
   return (
-    <div id="form__login">
+    <form id="form__login" onSubmit={handleSubmit(onSubmit)}>
       <h3 className="form__login-title">Enter your credentials</h3>
       <div className="form__login-email">
         <label htmlFor="email-input">Email Address</label>
@@ -18,9 +55,7 @@ const FormLogin = () => {
           id="email-input"
           type="email"
           placeholder="example@gmail.com"
-          value={email}
-          onChange={({ target }) => setEmail(target.value)}
-          required
+          {...register("email", { required: true })}
         />
       </div>
       <div className="form__login-password">
@@ -32,24 +67,18 @@ const FormLogin = () => {
           id="password-input"
           type="password"
           placeholder="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          {...register("password", { required: true })}
         />
       </div>
       <div className="form__login-remember-me">
         <input
           id="rememberme-input"
           type="checkbox"
-          checked={keepSession}
-          onChange={() => setKeepSession(!keepSession)}
+          {...register("keepMeSignedIn")}
         />
         <label htmlFor="rememberme-input">Keep me signed in</label>
       </div>
-      <ButtonLogin
-        username={email}
-        password={password}
-        className="form__login-btn-login"
-      />
+      <input type="submit" value="LOGIN" className="btn__primary" />
       <div className="form__login-signup">
         <span>Not a member? </span>
         <span
@@ -59,11 +88,12 @@ const FormLogin = () => {
           Sign up
         </span>
       </div>
-      <Modal
+      {/* <Modal
         isOpen={registerModalIsOpen}
         toggleModal={setRegisterModalIsOpen}
-      ></Modal>
-    </div>
+      ></Modal> */}
+      <ToastContainer autoClose={1500} />
+    </form>
   );
 };
 

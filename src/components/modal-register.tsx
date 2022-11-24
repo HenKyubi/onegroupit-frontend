@@ -5,7 +5,7 @@ import Modal from "./modal";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-type FormRegister = {
+type formRegister = {
   firstName: string;
   lastName: string;
   password: string;
@@ -21,8 +21,8 @@ const ModalRegister: React.FC<{
     register,
     handleSubmit,
     // formState: { errors },
-  } = useForm<FormRegister>();
-  const onSubmit = (data: FormRegister) => {
+  } = useForm<formRegister>();
+  const onSubmit = (data: formRegister) => {
     if (data.password === data.repeatPassword) {
       console.log("ok");
     }else{

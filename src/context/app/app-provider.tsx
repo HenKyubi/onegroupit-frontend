@@ -4,12 +4,10 @@ import { AppContext } from "./app-context";
 import { AppReducer } from "./app-reducer";
 
 const INITIAL_STATE: AppState = {
-  avatar: "",
+  firstName: "",
+  lastName: "",
   email: "",
-  password: "",
-  actualDate: new Date(),
-  lastLogging: new Date(),
-  logged: false,
+  token: "",
 };
 
 interface Props {
@@ -20,15 +18,6 @@ export const AppProvider = ({ children }: Props) => {
   const login = () => {
     dispatch({ type: "login" });
   };
-  const saveOnLocalStorage = () => {
-    dispatch({ type: "saveOnLocalStorage" });
-  };
-  const encryptPassword = (password: string) => {
-    dispatch({ type: "encryptPassword", payload: { password } });
-  };
-  const unencryptPassword = () => {
-    dispatch({ type: "unencryptPassword" });
-  };
   const closeSession = () => {
     dispatch({ type: "closeSession" });
   };
@@ -37,9 +26,6 @@ export const AppProvider = ({ children }: Props) => {
       value={{
         appState,
         login: login,
-        saveOnLocalStorage: saveOnLocalStorage,
-        encryptPassword: encryptPassword,
-        unencryptPassword: unencryptPassword,
         closeSession: closeSession,
       }}
     >
