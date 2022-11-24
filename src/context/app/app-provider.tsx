@@ -4,6 +4,7 @@ import { AppContext } from "./app-context";
 import { AppReducer } from "./app-reducer";
 
 const INITIAL_STATE: AppState = {
+  id: "",
   firstName: "",
   lastName: "",
   email: "",
