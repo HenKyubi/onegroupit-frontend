@@ -1,10 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaUserCircle, FaLock, FaEnvelope } from "react-icons/fa";
-import Modal from "./modal";
 
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+//API
+import { registerUser } from "../api";
+import Modal from "./modal";
+
 type formRegister = {
   firstName: string;
   lastName: string;
@@ -13,25 +16,33 @@ type formRegister = {
   email: string;
 };
 
-const ModalRegister: React.FC<{
+const FormRegister: React.FC<{
   isOpen: boolean;
   toggleModal: () => void;
 }> = ({ isOpen, toggleModal }) => {
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm<formRegister>();
-  const onSubmit = (data: formRegister) => {
-    if (data.password === data.repeatPassword) {
-      console.log("ok");
-    }else{
+  const { register, handleSubmit, reset } = useForm<formRegister>();
+  const toastSuccess = (message: string) => toast.success(message);
+  const toastError = (message: string) => toast.error(message);
 
+  const onSubmit = async (data: formRegister) => {
+    if (data.password === data.repeatPassword) {
+      await registerUser(
+        data.firstName,
+        data.lastName,
+        data.email,
+        data.password
+      ).then((res) => {
+        if (res.message === "User registred") {
+          reset();
+          toastSuccess(res.message);
+        } else {
+          toastError(res.message);
+        }
+      });
+    } else {
+      toastError("Passwords not are the same");
     }
   };
-
-  const notify = () => toast.success("Wow so easy!");
-  // const error = () => toast.error('also be wron')
 
   return (
     <Modal isOpen={isOpen} toggleModal={toggleModal}>
@@ -228,15 +239,11 @@ const ModalRegister: React.FC<{
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <input className="btn__primary" type={"submit"} value="Submit" />
-          {/* Submit
-          </input> */}
         </div>
-
-        <button onClick={notify}>Notify!</button>
-        <ToastContainer autoClose={2000} toastClassName={'success'}/>
+        <ToastContainer autoClose={1500} />
       </form>
     </Modal>
   );
 };
 
-export default ModalRegister;
+export default FormRegister;

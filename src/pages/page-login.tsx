@@ -1,11 +1,15 @@
-import React from "react";
+import "../styles/page-login.scss";
+
+//Hooks
+import { useModal } from "../hooks/useModal";
+
+//Components
 import ButtonRegister from "../components/button-register";
 import FormLogin from "../components/form-login";
-import "../styles/page-login.scss";
-// import datos from "../users.json";
+import FormRegister from "../components/form-register";
+
+//Assets
 import logo from "../assets/logo.png";
-import { useModal } from "../hooks/useModal";
-import ModalRegister from "../components/modal-register";
 
 const PageLogin = () => {
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
@@ -32,9 +36,8 @@ const PageLogin = () => {
         <div className="section__rigth-login">
           <FormLogin />
         </div>
-        {/* {JSON.stringify(datos)} */}
       </div>
-      <ModalRegister
+      <FormRegister
         isOpen={registerModalIsOpen}
         toggleModal={setRegisterModalIsOpen}
       />

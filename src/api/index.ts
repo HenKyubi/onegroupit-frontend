@@ -24,3 +24,24 @@ export const login = async (
       return error.response.data;
     });
 };
+
+export const registerUser = async (
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+): Promise<{ message: string }> => {
+  return await axios
+    .post(`${server}/auth/signup`, {
+      firstName,
+      lastName,
+      email,
+      password,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+};

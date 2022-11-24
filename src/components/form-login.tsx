@@ -1,10 +1,11 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 //Context
 import { AppContext } from "../context/app/app-context";
 
 //Toast
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 //Hooks
 import { useForm } from "react-hook-form";
@@ -14,8 +15,7 @@ import { useModal } from "../hooks/useModal";
 import { login } from "../api";
 
 //Components
-import Modal from "./modal";
-import { useNavigate } from "react-router-dom";
+import FormRegister from "./form-register";
 
 //Types
 type formLogin = {
@@ -31,28 +31,26 @@ const FormLogin = () => {
 
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm<formLogin>();
+  const { register, handleSubmit } = useForm<formLogin>();
+
+  const toastError = (message: string) => toast.error(message);
 
   const onSubmit = async (data: formLogin) => {
-    await login(data.email, data.password).then((res) => {
-      if (res.userData.token === null) {
-        const toastError = () => toast.error(res.message);
-        toastError();
-      } else {
-        const { id, firstName, lastName, email, token } = res.userData;
-        appState.id = id;
-        appState.firstName = firstName;
-        appState.lastName = lastName;
-        appState.email = email;
-        appState.token = token;
-        navigate("/products");
-        console.log(appState);
-      }
-    });
+    await login(data.email, data.password)
+      .then((res) => {
+        if (res?.userData === null) {
+          toastError(res.message);
+        } else {
+          const { id, firstName, lastName, email, token } = res.userData;
+          appState.id = id;
+          appState.firstName = firstName;
+          appState.lastName = lastName;
+          appState.email = email;
+          appState.token = token;
+          navigate("/products");
+        }
+      })
+      .catch((error) => toastError(error));
   };
 
   return (
@@ -97,10 +95,10 @@ const FormLogin = () => {
           Sign up
         </span>
       </div>
-      {/* <Modal
+      <FormRegister
         isOpen={registerModalIsOpen}
         toggleModal={setRegisterModalIsOpen}
-      ></Modal> */}
+      />
       <ToastContainer autoClose={1500} />
     </form>
   );
