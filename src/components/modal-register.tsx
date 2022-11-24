@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { FaUserCircle, FaLock, FaEnvelope } from "react-icons/fa";
 import Modal from "./modal";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 type FormRegister = {
   firstName: string;
   lastName: string;
@@ -24,9 +26,12 @@ const ModalRegister: React.FC<{
     if (data.password === data.repeatPassword) {
       console.log("ok");
     }else{
-      
+
     }
   };
+
+  const notify = () => toast.success("Wow so easy!");
+  // const error = () => toast.error('also be wron')
 
   return (
     <Modal isOpen={isOpen} toggleModal={toggleModal}>
@@ -72,7 +77,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: '#248aff'
+                color: "#248aff",
               }}
             />
           </div>
@@ -108,7 +113,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: '#248aff'
+                color: "#248aff",
               }}
             />
           </div>
@@ -144,7 +149,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: '#248aff'
+                color: "#248aff",
               }}
             />
           </div>
@@ -180,7 +185,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: '#248aff'
+                color: "#248aff",
               }}
             />
           </div>
@@ -216,7 +221,7 @@ const ModalRegister: React.FC<{
                 paddingRight: "0.5rem",
                 fontSize: "1.5rem",
                 fontWeight: "500",
-                color: '#248aff'
+                color: "#248aff",
               }}
             />
           </div>
@@ -226,6 +231,9 @@ const ModalRegister: React.FC<{
           {/* Submit
           </input> */}
         </div>
+
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer autoClose={2000} toastClassName={'success'}/>
       </form>
     </Modal>
   );
