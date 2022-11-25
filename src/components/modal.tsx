@@ -1,16 +1,14 @@
 import React from "react";
-import "./modal.scss";
 
 const Modal: React.FC<{
   children?: JSX.Element | JSX.Element[];
-  toggleModal: () => void;
   isOpen: boolean;
+  toggleModal: () => void;
 }> = ({ children, isOpen, toggleModal }) => {
-  // const handleModalToggle = (e: Event ) => e.stopPropagation();
   return (
     <div className={`modal ${isOpen && "isOpen"}`}>
       <div className="modal__container">
-        <div className="modal__close">
+        <div className="modal__container-close">
           <button onClick={toggleModal}>x</button>
         </div>
         {children}
