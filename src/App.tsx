@@ -5,7 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppProvider } from "./context/app/app-provider";
 
 //Styles
-import "./App.scss";
+import './styles/styles.scss'
+import "react-toastify/dist/ReactToastify.css";
+
+// import "./App.scss";
 
 //Pages
 import PageLogin from "./pages/page-login";

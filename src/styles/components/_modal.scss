@@ -1,12 +1,13 @@
+@use "../variables" as var;
+
 .modal {
-  position: absolute;
+  position: fixed;
   z-index: 999;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #000000;
-  opacity: 0.75;
+  background-color: rgba($color: var.$color-tertiary, $alpha: 0.75);
   display: none;
   &.isOpen {
     display: flex;
@@ -15,7 +16,7 @@
   }
   &__container {
     position: relative;
-    background-color: #ffffff;
+    background-color: var.$color-secondary;
     padding: 1rem;
     border-radius: 8px;
     min-width: 20%;
@@ -23,14 +24,13 @@
     &-close {
       display: flex;
       justify-content: flex-end;
-      button{
+      button {
         font-size: 1rem;
         font-weight: 700;
         border: none;
-        color: #000000;
+        color: var.$color-secondary;
         border-radius: 50%;
-        
-        background-color: none;
+        background-color: #c4c4c4 ;
       }
     }
   }

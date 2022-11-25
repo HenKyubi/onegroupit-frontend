@@ -1,0 +1,12 @@
+//Global
+@forward 'global';
+
+//Components
+@forward "components/form-register";
+@forward "components/modal";
+@forward "components/navbar";
+@forward "components/product";
+
+//Pages
+@forward 'pages/page-login';
+@forward 'pages/page-products';

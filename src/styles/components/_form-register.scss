@@ -1,3 +1,5 @@
+@use '../variables' as var;
+
 .form__register {
   display: flex;
   flex-direction: column;
@@ -22,7 +24,7 @@
       padding-right: 0.5rem;
       font-size: 1.5rem;
       font-weight: 500;
-      color: #248aff;
+      color: var.$color-primary;
     }
   }
   .form__register-box-btn-submit {

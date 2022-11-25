@@ -1,3 +1,5 @@
+@use "../variables" as var;
+
 #navbar {
   height: 8%;
   background-color: #ffffff;
@@ -35,8 +37,8 @@
     &-btn-new-product {
       height: 100%;
       border: none;
-      background-color: #248aff;
-      color: #ffffff;
+      background-color: var.$color-primary;
+      color: var.$color-secondary;
       border-radius: 6px;
       box-sizing: border-box;
       padding: 0.5em 1em;
@@ -69,7 +71,7 @@
       span {
         font-size: 16px;
         font-weight: 500;
-        color: #000000;
+        color: var.$color-tertiary;
       }
     }
     &-box-avatar {
