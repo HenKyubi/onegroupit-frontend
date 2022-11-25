@@ -1,3 +1,8 @@
+// import { useContext } from "react";
+
+//Context
+// import { AppContext } from "../context/app/app-context";
+
 //Components
 import Navbar from "../components/navbar";
 import Product from "../components/product";
@@ -5,29 +10,12 @@ import Product from "../components/product";
 //Assets
 import photo from "../assets/laptop.jpg";
 const PageProducts = () => {
+  // const { appState } = useContext(AppContext);
+
   return (
-    <div
-      // id="page-products"
-      style={{
-        backgroundColor: "#f4f4f4",
-        height: "100%",
-        width: "100%",
-      }}
-    >
+    <div className="page-products">
       <Navbar />
-      <div
-        style={{
-          width: "100%",
-          height: "92%",
-          boxSizing: "border-box",
-          padding: "1rem 4rem",
-          display: "grid",
-          gridTemplateColumns: "repeat(6, 1fr)",
-          gridTemplateRows: "repeat(3, 1fr)",
-          gridColumnGap: "10px",
-          gridRowGap: "20px",
-        }}
-      >
+      <div className="page-products__list-products">
         <Product
           productName="LAPTOP"
           productImg={photo}
