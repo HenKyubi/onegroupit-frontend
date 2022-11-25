@@ -1,0 +1,48 @@
+@use "variables" as var;
+
+.box__centred {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn__primary {
+  border: 1px var.$color-primary solid;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: var.$color-primary;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  &:hover {
+    transition: all 0.5s;
+    color: var.$color-primary;
+    background-color: #ffffff;
+  }
+}
+
+.btn__secondary {
+  width: 15%;
+  height: 100%;
+  border: 1px solid var.$color-primary;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: var.$color-primary;
+  font-size: 18px;
+  font-weight: 500;
+
+  &:hover {
+    transition: all 0.5s;
+    color: #ffffff;
+    background-color: var.$color-primary;
+  }
+}
+
+.pb-1 {
+  box-sizing: border-box;
+  padding-bottom: 0.5rem;
+}
+
+.textAlignCenter {
+  text-align: center;
+}

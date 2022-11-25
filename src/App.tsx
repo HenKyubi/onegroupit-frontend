@@ -5,11 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppProvider } from "./context/app/app-provider";
 
 //Styles
-import "./App.scss";
+import './styles/styles.scss'
+import "react-toastify/dist/ReactToastify.css";
+
+// import "./App.scss";
 
 //Pages
 import PageLogin from "./pages/page-login";
-import PageRegister from "./pages/page-register";
 import PageProducts from "./pages/page-products";
 
 function App() {
@@ -17,10 +19,6 @@ function App() {
     {
       path: "/",
       element: <PageLogin />,
-    },
-    {
-      path: "register",
-      element: <PageRegister />,
     },
     {
       path: "products",

@@ -1,8 +1,7 @@
 export interface AppState {
-  avatar: string;
+  id: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  password: string;
-  actualDate: Date;
-  lastLogging: Date;
-  logged: boolean;
+  token: string;
 }

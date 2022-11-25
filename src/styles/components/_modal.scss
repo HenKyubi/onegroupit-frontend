@@ -1,0 +1,37 @@
+@use "../variables" as var;
+
+.modal {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: var.$color-tertiary, $alpha: 0.75);
+  display: none;
+  &.isOpen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__container {
+    position: relative;
+    background-color: var.$color-secondary;
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 20%;
+    min-height: 20%;
+    &-close {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        font-size: 1rem;
+        font-weight: 700;
+        border: none;
+        color: var.$color-secondary;
+        border-radius: 50%;
+        background-color: #c4c4c4 ;
+      }
+    }
+  }
+}
