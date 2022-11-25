@@ -46,3 +46,27 @@
 .textAlignCenter {
   text-align: center;
 }
+
+.form__input_box {
+  border: 1px #c4c4c4 solid;
+  border-radius: 6px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem;
+  }
+  svg {
+    padding-right: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var.$color-primary;
+  }
+}

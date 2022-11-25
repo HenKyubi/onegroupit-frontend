@@ -52,7 +52,7 @@ const FormRegister: React.FC<{
           <h1 className="textAlignCenter">Sign up</h1>
         </div>
         <div className="pb-1">
-          <div className="form__register-box-input">
+          <div className="form__input_box">
             <input
               type="text"
               placeholder="First Name"
@@ -62,7 +62,7 @@ const FormRegister: React.FC<{
           </div>
         </div>
         <div className="pb-1">
-          <div className="form__register-box-input">
+          <div className="form__input_box">
             <input
               type="text"
               placeholder="Last Name"
@@ -72,7 +72,7 @@ const FormRegister: React.FC<{
           </div>
         </div>
         <div className="pb-1">
-          <div className="form__register-box-input">
+          <div className="form__input_box">
             <input
               type="email"
               placeholder="Email"
@@ -82,7 +82,7 @@ const FormRegister: React.FC<{
           </div>
         </div>
         <div className="pb-1">
-          <div className="form__register-box-input">
+          <div className="form__input_box">
             <input
               type="password"
               placeholder="Password"
@@ -92,7 +92,7 @@ const FormRegister: React.FC<{
           </div>
         </div>
         <div className="pb-1">
-          <div className="form__register-box-input">
+          <div className="form__input_box">
             <input
               type="password"
               placeholder="Repeat Password"

@@ -8,11 +8,14 @@ import { AppContext } from "../context/app/app-context";
 
 //Assets
 import userAvatar from "../assets/logo.png";
+import { useModal } from "../hooks/useModal";
+import FormProduct from "./form-product";
 
 const Navbar = () => {
   const { appState } = useContext(AppContext);
 
   const [searchInput, setSearchInput] = useState<string>("");
+  const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
   const username = `${appState.firstName} ${appState.lastName}`;
 
@@ -20,6 +23,8 @@ const Navbar = () => {
     console.log(search);
     setSearchInput(search);
   };
+
+  // const handleOnClickNewProduct = () => {};
   return (
     <nav id="navbar">
       <div className="searchbar">
@@ -32,7 +37,10 @@ const Navbar = () => {
         />
       </div>
       <div className="navbar__options">
-        <button className="navbar__options-btn-new-product">
+        <button
+          className="navbar__options-btn-new-product"
+          onClick={setRegisterModalIsOpen}
+        >
           <div>
             <FaPlus />
           </div>
@@ -48,6 +56,10 @@ const Navbar = () => {
           <img src={userAvatar} alt="name of user avatar" />
         </div>
       </div>
+      <FormProduct
+        isOpen={registerModalIsOpen}
+        toggleModal={setRegisterModalIsOpen}
+      />
     </nav>
   );
 };
