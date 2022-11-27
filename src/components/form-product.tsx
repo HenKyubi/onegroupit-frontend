@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaMoneyBill, FaStar, FaShoppingBag, FaLink } from "react-icons/fa";
-
 import { ToastContainer, toast } from "react-toastify";
 
 //API
-// import { registerUser } from "../api";
+import { registerNewProduct } from "../api";
+
+//Components
 import Modal from "./modal";
+
+//Context
+import { AppContext } from "../context/app/app-context";
 
 type formProduct = {
   name: string;
   price: number;
   img: string;
   calification: number;
-  timestamp: Date;
+  dateOfExpiration: Date;
 };
 
 const FormProduct: React.FC<{
@@ -24,27 +28,23 @@ const FormProduct: React.FC<{
   const toastSuccess = (message: string) => toast.success(message);
   const toastError = (message: string) => toast.error(message);
 
+  const { appState } = useContext(AppContext);
+
   const onSubmit = async (data: formProduct) => {
-    console.log(data);
-    // if (data.password === data.repeatPassword) {
-    //   await registerUser(
-    //     data.firstName,
-    //     data.lastName,
-    //     data.email,
-    //     data.password
-    //   ).then((res) => {
-    //     if (res.message === "User registred") {
-    // console.log(errors);
-    // reset();
-    //       toggleModal();
-    //       toastSuccess(res.message);
-    //     } else {
-    //       toastError(res.message);
-    //     }
-    //   });
-    // } else {
-    //   toastError("Passwords not are the same");
-    // }
+    const res = await registerNewProduct(
+      data.name,
+      data.price,
+      data.img,
+      data.dateOfExpiration,
+      data.calification,
+      appState.token
+    );
+    if (res.message === "Success") {
+      toastSuccess(res.message);
+      reset();
+    } else {
+      toastError(res.message);
+    }
   };
 
   return (
@@ -107,9 +107,9 @@ const FormProduct: React.FC<{
         <div className="pb-1">
           <div className="form__input_box">
             <input
-              type="date"
-              placeholder="Time left"
-              {...register("timestamp", { required: true })}
+              type="datetime-local"
+              placeholder="Date of expiration"
+              {...register("dateOfExpiration", { required: true })}
               required
             />
           </div>

@@ -45,3 +45,36 @@ export const registerUser = async (
       return error.response.data;
     });
 };
+
+export const registerNewProduct = async (
+  name: string,
+  price: number,
+  imgUrl: string,
+  dateOfExpiration: Date,
+  calification: number,
+  token: string
+): Promise<{ message: string }> => {
+  return await axios
+    .post(
+      `${server}/products`,
+      {
+        name,
+        price,
+        imgUrl,
+        dateOfExpiration,
+        calification,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return { message: error };
+    });
+};
