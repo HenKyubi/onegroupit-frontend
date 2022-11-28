@@ -16,6 +16,13 @@ const Product: React.FC<{
   productCalification,
 }) => {
   const [toggle, setToggle] = useState(false);
+  const [remainnTime, setRemainTime] = useState({
+    remainTime : 0,
+    remainDays : 0,
+    remainHours : "",
+    remainMinutes : "",
+    remainSeconds : "",
+  });
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -50,16 +57,16 @@ const Product: React.FC<{
     let remainMinutes = ("0" + Math.floor((remainTime / 60) % 60)).slice(-2);
     let remainHours = ("0" + Math.floor((remainTime / 3600) % 24)).slice(-2);
     let remainDays = Math.floor(remainTime / (3600 * 24));
-    return {
+    setRemainTime({
       remainTime,
       remainDays,
       remainHours,
       remainMinutes,
       remainSeconds,
-    };
+    });
   };
 
-  const remainTime = getRemainTime(productDateOfExpiration);
+  setInterval(()=>{getRemainTime(productDateOfExpiration)}, 1000)
 
   return (
     <div className="product">
@@ -79,8 +86,8 @@ const Product: React.FC<{
             <div className="product__box-details-container-timestamp-calification-timestamp">
               <FaRegClock />
               <span>
-                {remainTime.remainTime > 0
-                  ? `${remainTime.remainDays} d ${remainTime.remainHours} h`
+                {remainnTime.remainTime > 0
+                  ? `${remainnTime.remainDays} d ${remainnTime.remainHours} h`
                   : "Expired"}
               </span>
             </div>
