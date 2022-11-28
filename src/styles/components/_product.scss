@@ -1,4 +1,8 @@
 .product {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 28px;
   background-color: #ffffff;
   box-shadow: 0px 3.1305556297302246px 34.43611145019531px -16.43541717529297px #00000040;
@@ -69,6 +73,7 @@
           }
         }
         &-calification {
+          display: flex;
           .star-active {
             color: #f8a33c;
             font-size: 14px;
