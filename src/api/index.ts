@@ -81,7 +81,7 @@ export const registerNewProduct = async (
 
 export const getProducts = async (
   token: string
-): Promise<{ message: string; productsData: {} }> => {
+): Promise<{ message: string; productsData: [] }> => {
   return await axios
     .get(`${server}/products`, {
       headers: {
