@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Context
-import { AppContext } from "../context/app/app-context";
+import { AppContext } from "../context/app/appContext";
 
 //Toast
 import { ToastContainer, toast } from "react-toastify";

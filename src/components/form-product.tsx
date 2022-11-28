@@ -10,7 +10,7 @@ import { registerNewProduct } from "../api";
 import Modal from "./modal";
 
 //Context
-import { AppContext } from "../context/app/app-context";
+import { AppContext } from "../context/app/appContext";
 
 type formProduct = {
   name: string;

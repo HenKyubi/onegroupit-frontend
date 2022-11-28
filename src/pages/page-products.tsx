@@ -1,37 +1,32 @@
 import { useContext, useEffect } from "react";
 
-import { getProducts } from "../api";
-
 //Context
-import { AppContext } from "../context/app/app-context";
+import { AppContext } from "../context/app/appContext";
 
 //Components
 import Navbar from "../components/navbar";
 import Product from "../components/product";
 
 const PageProducts = () => {
-  const { appState } = useContext(AppContext);
-
-  const fetchProducts = async () => {
-    const res = await getProducts(appState.token);
-    // if (res.message === "Success") {
-      appState.productList = res.productsData;
-    // }
-  };
+  const { appState, getProducts } = useContext(AppContext);
 
   useEffect(() => {
-    fetchProducts();
+    getProducts(appState.token);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="page-products">
       <Navbar />
       <div className="page-products__list-products">
-        {appState.productList.map((product) => (
+        {appState?.productsList?.map((product, key) => (
           <Product
+            key={key}
             productName={product.name}
             productPrice={product.price}
             productImg={product.imgUrl}
+            productDateOfExpiration={product.dateOfExpiration}
+            productCalification={product.calification}
           />
         ))}
       </div>

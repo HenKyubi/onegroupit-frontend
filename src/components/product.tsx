@@ -24,8 +24,8 @@ const Product: React.FC<{
   return (
     <div className="product">
       <div className="product__box-top-image">
-        <div style={{ backgroundImage: `${productImg}` }}></div>
-        {/* <img src={productImg} alt={productImg} /> */}
+        {/* <div style={{ backgroundImage: `${productImg}` }}></div> */}
+        <img src={productImg} alt={productImg} />
       </div>
       <div className="product__box-details">
         <div className="product__box-details-container">

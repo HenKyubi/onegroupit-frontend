@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { FaSearch, FaPlus, FaBell } from "react-icons/fa";
 
 //Context
-import { AppContext } from "../context/app/app-context";
+import { AppContext } from "../context/app/appContext";
 
 //Assets
 import userAvatar from "../assets/logo.png";

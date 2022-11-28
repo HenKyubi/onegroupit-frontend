@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Context
-import { AppProvider } from "./context/app/app-provider";
+import { AppProvider } from "./context/app/appProvider";
 
 //Styles
 import './styles/styles.scss'

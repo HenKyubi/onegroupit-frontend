@@ -78,20 +78,3 @@ export const registerNewProduct = async (
       return { message: error };
     });
 };
-
-export const getProducts = async (
-  token: string
-): Promise<{ message: string; productsData: [] }> => {
-  return await axios
-    .get(`${server}/products`, {
-      headers: {
-        "x-access-token": token,
-      },
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => {
-      return { message: error };
-    });
-};

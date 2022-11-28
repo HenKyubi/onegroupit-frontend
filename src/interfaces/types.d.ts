@@ -4,7 +4,7 @@ export interface AppState {
   lastName: string;
   email: string;
   token: string;
-  productList: Product[];
+  productsList: Product[];
 }
 
 export interface Product {
