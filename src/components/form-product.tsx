@@ -25,10 +25,11 @@ const FormProduct: React.FC<{
   toggleModal: () => void;
 }> = ({ isOpen, toggleModal }) => {
   const { register, handleSubmit, reset } = useForm<formProduct>();
+
   const toastSuccess = (message: string) => toast.success(message);
   const toastError = (message: string) => toast.error(message);
 
-  const { appState } = useContext(AppContext);
+  const { appState, getProducts } = useContext(AppContext);
 
   const onSubmit = async (data: formProduct) => {
     const res = await registerNewProduct(
@@ -40,6 +41,7 @@ const FormProduct: React.FC<{
       appState.token
     );
     if (res.message === "Success") {
+      getProducts(appState.token);
       toastSuccess(res.message);
       reset();
     } else {
