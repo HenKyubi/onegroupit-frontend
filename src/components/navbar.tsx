@@ -1,36 +1,28 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
-//Icons
-import { FaSearch, FaPlus, FaBell } from "react-icons/fa";
+//Libs
+import { FaPlus, FaBell } from "react-icons/fa";
+
+//Hooks
+import { useModal } from "../hooks/useModal";
 
 //Context
 import { AppContext } from "../context/app/appContext";
 
-//Assets
-import userAvatar from "../assets/logo.png";
-import { useModal } from "../hooks/useModal";
+//Components
 import FormProduct from "./form-product";
 import Searchbar from "./searchbar";
 
 const Navbar = () => {
   const { appState } = useContext(AppContext);
 
-  // const [searchInput, setSearchInput] = useState<string>("");
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
   const username = `${appState.firstName} ${appState.lastName}`;
 
-  // const handleSearch = (search: string) => {
-  //   console.log(search);
-  //   setSearchInput(search);
-  // };
-
-  // const handleOnClickNewProduct = () => {};
   return (
     <nav id="navbar">
-      {/* <div className="searchbar"> */}
-        <Searchbar/>
-      {/* </div> */}
+      <Searchbar />
       <div className="navbar__options">
         <button
           className="navbar__options-btn-new-product"
@@ -48,7 +40,10 @@ const Navbar = () => {
           <span>{username}</span>
         </div>
         <div className="navbar__options-box-avatar">
-          <img src={userAvatar} alt="name of user avatar" />
+          <img
+            src={"https://placeimg.com/400/400/people"}
+            alt={`${username} avatar`}
+          />
         </div>
       </div>
       <FormProduct

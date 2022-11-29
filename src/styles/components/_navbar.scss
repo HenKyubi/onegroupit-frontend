@@ -12,6 +12,7 @@
   
   .navbar__options {
     width: 75%;
+    height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -58,10 +59,10 @@
     &-box-avatar {
       box-sizing: border-box;
       padding-left: 1.5em;
+      height: 100%;
       img {
         height: 100%;
-        width: 100%;
-        max-width: 4em;
+        width: auto;
         border-radius: 50%;
         box-shadow: 0px 2px 4px 0px #00000040;
       }
