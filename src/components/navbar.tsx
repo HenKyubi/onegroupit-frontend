@@ -10,32 +10,27 @@ import { AppContext } from "../context/app/appContext";
 import userAvatar from "../assets/logo.png";
 import { useModal } from "../hooks/useModal";
 import FormProduct from "./form-product";
+import Searchbar from "./searchbar";
 
 const Navbar = () => {
   const { appState } = useContext(AppContext);
 
-  const [searchInput, setSearchInput] = useState<string>("");
+  // const [searchInput, setSearchInput] = useState<string>("");
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
   const username = `${appState.firstName} ${appState.lastName}`;
 
-  const handleSearch = (search: string) => {
-    console.log(search);
-    setSearchInput(search);
-  };
+  // const handleSearch = (search: string) => {
+  //   console.log(search);
+  //   setSearchInput(search);
+  // };
 
   // const handleOnClickNewProduct = () => {};
   return (
     <nav id="navbar">
-      <div className="searchbar">
-        <FaSearch />
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchInput}
-          onChange={(e) => handleSearch(e.target.value)}
-        />
-      </div>
+      {/* <div className="searchbar"> */}
+        <Searchbar/>
+      {/* </div> */}
       <div className="navbar__options">
         <button
           className="navbar__options-btn-new-product"

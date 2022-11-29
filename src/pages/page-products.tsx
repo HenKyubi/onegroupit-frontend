@@ -12,23 +12,35 @@ const PageProducts = () => {
 
   useEffect(() => {
     getProducts(appState.token);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="page-products">
       <Navbar />
       <div className="page-products__list-products">
-        {appState?.productsList?.map((product, key) => (
-          <Product
-            key={key}
-            productName={product.name}
-            productPrice={product.price}
-            productImg={product.imgUrl}
-            productDateOfExpiration={product.dateOfExpiration}
-            productCalification={product.calification}
-          />
-        ))}
+        {!appState.hasActiveFilters &&
+          appState?.productsList?.map((product, key) => (
+            <Product
+              key={key}
+              productName={product.name}
+              productPrice={product.price}
+              productImg={product.imgUrl}
+              productDateOfExpiration={product.dateOfExpiration}
+              productCalification={product.calification}
+            />
+          ))}
+        {appState.hasActiveFilters &&
+          appState?.productsListFiltred?.map((product, key) => (
+            <Product
+              key={key}
+              productName={product.name}
+              productPrice={product.price}
+              productImg={product.imgUrl}
+              productDateOfExpiration={product.dateOfExpiration}
+              productCalification={product.calification}
+            />
+          ))}
       </div>
     </div>
   );

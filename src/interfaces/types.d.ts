@@ -4,7 +4,9 @@ export interface AppState {
   lastName: string;
   email: string;
   token: string;
-  productsList: Product[];
+  productsList: Array<Product>;
+  productsListFiltred: Array<Product>;
+  hasActiveFilters: boolean;
 }
 
 export interface Product {

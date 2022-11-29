@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer } from "react";
-import { AppState } from "../../interfaces/types";
+import { AppState, Product } from "../../interfaces/types";
 import { AppContext } from "./appContext";
 import { AppReducer } from "./appReducer";
 
@@ -15,6 +15,8 @@ const INITIAL_STATE: AppState = {
   email: "",
   token: "",
   productsList: [],
+  productsListFiltred: [],
+  hasActiveFilters: false,
 };
 
 export const AppProvider = ({ children }: props) => {
@@ -41,8 +43,31 @@ export const AppProvider = ({ children }: props) => {
       });
   };
 
+  const setProductsList = (productsList: Product[]) => {
+    dispatch({ type: "setProductsList", payload: { productsList } });
+  };
+
+  const setFilterProductsList = (filterProductsList: Product[]) => {
+    dispatch({
+      type: "setFilterProductsList",
+      payload: { filterProductsList },
+    });
+  };
+
+  const setHasFilters = (hasFilters: boolean) => {
+    dispatch({ type: "setHasFilters", payload: { hasFilters } });
+  };
+
   return (
-    <AppContext.Provider value={{ appState, getProducts }}>
+    <AppContext.Provider
+      value={{
+        appState,
+        getProducts,
+        setProductsList,
+        setHasFilters,
+        setFilterProductsList,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

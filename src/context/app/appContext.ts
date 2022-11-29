@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import { AppState } from "../../interfaces/types";
+import { AppState, Product } from "../../interfaces/types";
 
 type AppContextProps = {
   appState: AppState;
-  getProducts: (token: string) => Promise<{message: string;}>;
-  // setProductList: () => void;
-  // login: () => void;
-  // closeSession: () => void;
+  getProducts: (token: string) => Promise<{ message: string }>;
+  setProductsList: (productsList: Product[]) => void;
+  setHasFilters: (hasFilters: boolean) => void;
+  setFilterProductsList: (productsList: Product[]) => void;
 };
 
 export const AppContext = createContext<AppContextProps>({} as AppContextProps);
