@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { FaRegClock, FaRegStar, FaStar } from "react-icons/fa";
+import React, { useState, useContext } from "react";
+import { FaRegClock, FaRegStar, FaStar, FaPen, FaTrash } from "react-icons/fa";
+import { deleteProduct } from "../api";
+
+//Context
+import { AppContext } from "../context/app/appContext";
 
 const Product: React.FC<{
   className?: string;
+  productId: string;
   productName: string;
   productPrice: number;
   productImg: string;
   productCalification: number;
   productDateOfExpiration: Date;
 }> = ({
+  productId,
   productName,
   productPrice,
   productImg,
@@ -16,17 +22,24 @@ const Product: React.FC<{
   productCalification,
 }) => {
   const [toggle, setToggle] = useState(false);
+
   const [remainnTime, setRemainTime] = useState({
-    remainTime : 0,
-    remainDays : 0,
-    remainHours : "",
-    remainMinutes : "",
-    remainSeconds : "",
+    remainTime: 0,
+    remainDays: 0,
+    remainHours: "",
+    remainMinutes: "",
+    remainSeconds: "",
   });
+
+  const { appState, getProducts } = useContext(AppContext);
+
+  const handleDeleteProduct = async () => {
+    await deleteProduct(productId, appState.token);
+    await getProducts(appState.token);
+  };
 
   const handleToggle = () => {
     setToggle(!toggle);
-    console.log(toggle);
   };
 
   const stars: JSX.Element[] = [];
@@ -50,13 +63,13 @@ const Product: React.FC<{
   });
 
   const getRemainTime = (deadline: Date) => {
-    let now = Date.now();
-    let parseDeadLine = Date.parse(deadline.toString());
-    let remainTime = (parseDeadLine - now + 1000) / 1000;
-    let remainSeconds = ("0" + Math.floor(remainTime % 60)).slice(-2);
-    let remainMinutes = ("0" + Math.floor((remainTime / 60) % 60)).slice(-2);
-    let remainHours = ("0" + Math.floor((remainTime / 3600) % 24)).slice(-2);
-    let remainDays = Math.floor(remainTime / (3600 * 24));
+    const now = Date.now();
+    const parseDeadLine = Date.parse(deadline.toString());
+    const remainTime = (parseDeadLine - now + 1000) / 1000;
+    const remainSeconds = ("0" + Math.floor(remainTime % 60)).slice(-2);
+    const remainMinutes = ("0" + Math.floor((remainTime / 60) % 60)).slice(-2);
+    const remainHours = ("0" + Math.floor((remainTime / 3600) % 24)).slice(-2);
+    const remainDays = Math.floor(remainTime / (3600 * 24));
     setRemainTime({
       remainTime,
       remainDays,
@@ -66,7 +79,9 @@ const Product: React.FC<{
     });
   };
 
-  setInterval(()=>{getRemainTime(productDateOfExpiration)}, 1000)
+  setInterval(() => {
+    getRemainTime(productDateOfExpiration);
+  }, 1000);
 
   return (
     <div className="product">
@@ -77,7 +92,25 @@ const Product: React.FC<{
         <div className="product__box-details-container">
           <div className="product__box-details-container-title-options">
             <span>{productName}</span>
-            <button onClick={handleToggle}>፧</button>
+            <div className="dropdown">
+              <button className="dropbtn" onClick={handleToggle}>
+                ፧
+              </button>
+              <div className={`dropdown-content ${toggle && "show"}`}>
+                <div className="dropdown-content-item">
+                  <FaPen />
+                  <span>Edit</span>
+                </div>
+                <hr />
+                <div
+                  className="dropdown-content-item"
+                  onClick={handleDeleteProduct}
+                >
+                  <FaTrash />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
           </div>
           <span className="product__box-details-container-price">
             {formatter.format(productPrice)}

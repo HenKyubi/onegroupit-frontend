@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useReducer } from "react";
+import { GetProductsResponse } from "../../interfaces/getProductsResponse";
 import { AppState, Product } from "../../interfaces/types";
 import { AppContext } from "./appContext";
 import { AppReducer } from "./appReducer";
@@ -26,7 +27,7 @@ export const AppProvider = ({ children }: props) => {
 
   const getProducts = async (token: string): Promise<{ message: string }> => {
     return await axios
-      .get(`${server}/products`, {
+      .get<GetProductsResponse>(`${server}/products`, {
         headers: {
           "x-access-token": token,
         },
@@ -34,7 +35,7 @@ export const AppProvider = ({ children }: props) => {
       .then((res) => {
         dispatch({
           type: "getProducts",
-          payload: { productsList: res?.data?.productsData },
+          payload: { productsList: res.data.productsData },
         });
         return { message: "Success" };
       })

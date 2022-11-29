@@ -78,3 +78,23 @@ export const registerNewProduct = async (
       return { message: error };
     });
 };
+
+export const deleteProduct = async (
+  idProduct: string,
+  token: string
+): Promise<{
+  message: string;
+}> => {
+  return await axios
+    .delete(`${server}/products/${idProduct}`, {
+      headers: {
+        "x-access-token": token,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+};

@@ -10,6 +10,7 @@ export interface AppState {
 }
 
 export interface Product {
+  _id: string,
   name: string;
   price: number;
   imgUrl: string;

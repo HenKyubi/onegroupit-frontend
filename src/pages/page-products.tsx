@@ -23,6 +23,7 @@ const PageProducts = () => {
           appState?.productsList?.map((product, key) => (
             <Product
               key={key}
+              productId={product._id}
               productName={product.name}
               productPrice={product.price}
               productImg={product.imgUrl}
@@ -34,6 +35,7 @@ const PageProducts = () => {
           appState?.productsListFiltred?.map((product, key) => (
             <Product
               key={key}
+              productId={""}
               productName={product.name}
               productPrice={product.price}
               productImg={product.imgUrl}
