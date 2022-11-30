@@ -7,7 +7,19 @@ type AppActions =
       payload: { filterProductsList: Product[] };
     }
   | { type: "getProducts"; payload: { productsList: Product[] } }
-  | { type: "setHasFilters"; payload: { hasFilters: boolean } };
+  | { type: "setHasFilters"; payload: { hasFilters: boolean } }
+  | { type: "closeSession" };
+
+const INITIAL_STATE: AppState = {
+  id: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  token: "",
+  productsList: [],
+  productsListFiltred: [],
+  hasActiveFilters: false,
+};
 
 export const AppReducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
@@ -22,6 +34,8 @@ export const AppReducer = (state: AppState, action: AppActions): AppState => {
       };
     case "setHasFilters":
       return { ...state, hasActiveFilters: action.payload.hasFilters };
+    case "closeSession":
+      return { ...INITIAL_STATE };
     default:
       return state;
   }

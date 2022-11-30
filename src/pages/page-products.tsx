@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 //Context
 import { AppContext } from "../context/app/appContext";
 
@@ -8,9 +8,14 @@ import Navbar from "../components/navbar";
 import Product from "../components/product";
 
 const PageProducts = () => {
+  const navigate = useNavigate();
   const { appState, getProducts } = useContext(AppContext);
 
   useEffect(() => {
+    if (appState.token === "" || appState.token === null) {
+      navigate("/login", { replace: true });
+    } else {
+    }
     getProducts(appState.token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

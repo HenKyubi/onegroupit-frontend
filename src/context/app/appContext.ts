@@ -7,6 +7,7 @@ type AppContextProps = {
   setProductsList: (productsList: Product[]) => void;
   setHasFilters: (hasFilters: boolean) => void;
   setFilterProductsList: (productsList: Product[]) => void;
+  closeSession: () => void;
 };
 
 export const AppContext = createContext<AppContextProps>({} as AppContextProps);

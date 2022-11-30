@@ -59,6 +59,10 @@ export const AppProvider = ({ children }: props) => {
     dispatch({ type: "setHasFilters", payload: { hasFilters } });
   };
 
+  const closeSession = () => {
+    dispatch({ type: "closeSession" });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -67,6 +71,7 @@ export const AppProvider = ({ children }: props) => {
         setProductsList,
         setHasFilters,
         setFilterProductsList,
+        closeSession,
       }}
     >
       {children}
