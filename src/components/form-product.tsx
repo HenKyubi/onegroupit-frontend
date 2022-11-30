@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+import moment from "moment";
 import { useForm } from "react-hook-form";
-import { FaMoneyBill, FaStar, FaShoppingBag, FaLink } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import { FaMoneyBill, FaStar, FaShoppingBag, FaLink } from "react-icons/fa";
+import { Product, formProduct } from "../interfaces/types";
 
 //API
-import { registerNewProduct } from "../api";
+import { registerNewProduct, modifyProduct } from "../api";
 
 //Components
 import Modal from "./modal";
@@ -12,40 +14,77 @@ import Modal from "./modal";
 //Context
 import { AppContext } from "../context/app/appContext";
 
-type formProduct = {
-  name: string;
-  price: number;
-  img: string;
-  calification: number;
-  dateOfExpiration: Date;
-};
+type action = "modify" | "create";
 
 const FormProduct: React.FC<{
   isOpen: boolean;
   toggleModal: () => void;
-}> = ({ isOpen, toggleModal }) => {
-  const { register, handleSubmit, reset } = useForm<formProduct>();
+  productData?: Product;
+  action: action;
+}> = ({ isOpen, toggleModal, productData, action }) => {
+  const dateTimeFormated: string = moment(
+    productData?.dateOfExpiration,
+    moment.ISO_8601
+  ).format("YYYY-MM-DDTHH:mm");
+  const { register, handleSubmit, reset } = useForm<formProduct>({
+    defaultValues: {
+      ...productData,
+      dateOfExpiration: dateTimeFormated,
+    },
+  });
 
   const toastSuccess = (message: string) => toast.success(message);
   const toastError = (message: string) => toast.error(message);
 
   const { appState, getProducts } = useContext(AppContext);
 
-  const onSubmit = async (data: formProduct) => {
-    const res = await registerNewProduct(
-      data.name,
-      data.price,
-      data.img,
-      data.dateOfExpiration,
-      data.calification,
+  const modifyProductAction = async (data: formProduct) => {
+    await modifyProduct(
+      {
+        _id: productData?._id!,
+        ...data,
+        dateOfExpiration: new Date(data.dateOfExpiration),
+      },
       appState.token
-    );
-    if (res.message === "Success") {
-      getProducts(appState.token);
-      toastSuccess(res.message);
-      reset();
-    } else {
-      toastError(res.message);
+    )
+      .then(async (res) => {
+        toastSuccess(res.message);
+        await getProducts(appState.token);
+      })
+      .catch((error) => {
+        toastError(error.message);
+      });
+  };
+
+  const createProductAction = async (data: formProduct) => {
+    await registerNewProduct(
+      {
+        _id: productData?._id!,
+        ...data,
+        dateOfExpiration: new Date(data.dateOfExpiration),
+      },
+      appState.token
+    )
+      .then(async (res) => {
+        await getProducts(appState.token);
+        toastSuccess(res.message);
+        reset();
+      })
+      .catch((error) => {
+        toastError(error.message);
+      });
+  };
+
+  const onSubmit = (data: formProduct) => {
+    switch (action) {
+      case "create":
+        createProductAction(data);
+        break;
+      case "modify":
+        modifyProductAction(data);
+        break;
+      default:
+        break;
     }
   };
 
@@ -87,7 +126,7 @@ const FormProduct: React.FC<{
             <input
               type="url"
               placeholder="URL picture ex: https://"
-              {...register("img", { required: true })}
+              {...register("imgUrl", { required: true })}
               required
             />
             <FaLink />

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { Product } from "../interfaces/types";
+
 const server = "http://localhost:5000/api";
 
 export const login = async (
@@ -47,22 +49,14 @@ export const registerUser = async (
 };
 
 export const registerNewProduct = async (
-  name: string,
-  price: number,
-  imgUrl: string,
-  dateOfExpiration: Date,
-  calification: number,
+  productData: Product,
   token: string
 ): Promise<{ message: string }> => {
   return await axios
     .post(
       `${server}/products`,
       {
-        name,
-        price,
-        imgUrl,
-        dateOfExpiration,
-        calification,
+        ...productData,
       },
       {
         headers: {
@@ -91,6 +85,34 @@ export const deleteProduct = async (
         "x-access-token": token,
       },
     })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+};
+
+export const modifyProduct = async (
+  productData: Product,
+  token: string
+): Promise<{
+  message: string;
+}> => {
+  return await axios
+    .put(
+      `${server}/products/${productData._id}`,
+      {
+        ...productData,
+        dateOfExpiration: productData.dateOfExpiration.toISOString(),
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      }
+    )
     .then((res) => {
       return res.data;
     })

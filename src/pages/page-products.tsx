@@ -21,27 +21,11 @@ const PageProducts = () => {
       <div className="page-products__list-products">
         {!appState.hasActiveFilters &&
           appState?.productsList?.map((product, key) => (
-            <Product
-              key={key}
-              productId={product._id}
-              productName={product.name}
-              productPrice={product.price}
-              productImg={product.imgUrl}
-              productDateOfExpiration={product.dateOfExpiration}
-              productCalification={product.calification}
-            />
+            <Product key={key} productData={product} />
           ))}
         {appState.hasActiveFilters &&
           appState?.productsListFiltred?.map((product, key) => (
-            <Product
-              key={key}
-              productId={""}
-              productName={product.name}
-              productPrice={product.price}
-              productImg={product.imgUrl}
-              productDateOfExpiration={product.dateOfExpiration}
-              productCalification={product.calification}
-            />
+            <Product key={key} productData={product} />
           ))}
       </div>
     </div>

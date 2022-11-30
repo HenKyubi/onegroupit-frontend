@@ -49,6 +49,7 @@ const Navbar = () => {
       <FormProduct
         isOpen={registerModalIsOpen}
         toggleModal={setRegisterModalIsOpen}
+        action={"create"}
       />
     </nav>
   );

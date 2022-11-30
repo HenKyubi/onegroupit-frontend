@@ -20,3 +20,11 @@ export interface Product {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type formProduct = {
+  name: string;
+  price: number;
+  imgUrl: string;
+  calification: number;
+  dateOfExpiration: string;
+};
