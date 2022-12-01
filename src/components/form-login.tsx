@@ -16,6 +16,7 @@ import { login } from "../api";
 
 //Components
 import FormRegister from "./form-register";
+import { userData as UserData } from "../interfaces/types";
 
 //Types
 type formLogin = {
@@ -25,7 +26,7 @@ type formLogin = {
 };
 
 const FormLogin = () => {
-  const { appState } = useContext(AppContext);
+  const { setUserData } = useContext(AppContext);
 
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
@@ -35,19 +36,26 @@ const FormLogin = () => {
 
   const toastError = (message: string) => toast.error(message);
 
+  const saveSession = (keepSession: boolean, userData: UserData) => {
+    if (keepSession) {
+      localStorage.setItem("authData", JSON.stringify(userData));
+      setUserData(userData);
+    } else {
+      sessionStorage.setItem("authData", JSON.stringify(userData));
+      const lel = sessionStorage.getItem("authData");
+      console.log(lel);
+      setUserData(userData);
+    }
+  };
+
   const onSubmit = async (data: formLogin) => {
     await login(data.email, data.password)
       .then((res) => {
         if (res?.userData === null) {
           toastError(res.message);
         } else {
-          const { id, firstName, lastName, email, token } = res.userData;
-          appState.id = id;
-          appState.firstName = firstName;
-          appState.lastName = lastName;
-          appState.email = email;
-          appState.token = token;
-          navigate("/products");
+          saveSession(data.keepMeSignedIn, res.userData);
+          navigate("/products")
         }
       })
       .catch((error) => toastError(error));
@@ -63,6 +71,7 @@ const FormLogin = () => {
           type="email"
           placeholder="example@gmail.com"
           {...register("email", { required: true })}
+          required
         />
       </div>
       <div className="form__login-password">
@@ -75,6 +84,7 @@ const FormLogin = () => {
           type="password"
           placeholder="password"
           {...register("password", { required: true })}
+          required
         />
       </div>
       <div className="form__login-remember-me">

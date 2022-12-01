@@ -1,16 +1,12 @@
 export interface AppState {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  token: string;
+  userData: userData;
   productsList: Array<Product>;
   productsListFiltred: Array<Product>;
   hasActiveFilters: boolean;
 }
 
 export interface Product {
-  _id: string,
+  _id: string;
   name: string;
   price: number;
   imgUrl: string;
@@ -27,4 +23,12 @@ export type formProduct = {
   imgUrl: string;
   calification: number;
   dateOfExpiration: string;
+};
+
+export type userData = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  token: string;
 };

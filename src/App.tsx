@@ -7,6 +7,9 @@ import { AppProvider } from "./context/app/appProvider";
 import "./styles/styles.scss";
 import "react-toastify/dist/ReactToastify.css";
 
+//Components
+import ProtectedRoutes from "./components/protected-routes";
+
 //Pages
 import PageLogin from "./pages/page-login";
 import PageProducts from "./pages/page-products";
@@ -18,7 +21,14 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<PageLogin />} />
-            <Route path="/products" element={<PageProducts />} />
+            <Route
+              path="/products"
+              element={
+                <ProtectedRoutes>
+                  <PageProducts />
+                </ProtectedRoutes>
+              }
+            />
             <Route path="*" element={<Navigate replace to={"/products"} />} />
           </Routes>
         </BrowserRouter>

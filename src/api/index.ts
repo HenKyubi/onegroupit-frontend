@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { Product } from "../interfaces/types";
 
-const server = "http://localhost:5000/api";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const login = async (
   email: string,
@@ -18,7 +18,7 @@ export const login = async (
   message: string;
 }> => {
   return await axios
-    .post(`${server}/auth/signin`, { email, password })
+    .post(`${API_URL}/auth/signin`, { email, password })
     .then((res) => {
       return res.data;
     })
@@ -34,7 +34,7 @@ export const registerUser = async (
   password: string
 ): Promise<{ message: string }> => {
   return await axios
-    .post(`${server}/auth/signup`, {
+    .post(`${API_URL}/auth/signup`, {
       firstName,
       lastName,
       email,
@@ -54,7 +54,7 @@ export const registerNewProduct = async (
 ): Promise<{ message: string }> => {
   return await axios
     .post(
-      `${server}/products`,
+      `${API_URL}/products`,
       {
         ...productData,
       },
@@ -80,7 +80,7 @@ export const deleteProduct = async (
   message: string;
 }> => {
   return await axios
-    .delete(`${server}/products/${idProduct}`, {
+    .delete(`${API_URL}/products/${idProduct}`, {
       headers: {
         "x-access-token": token,
       },
@@ -101,7 +101,7 @@ export const modifyProduct = async (
 }> => {
   return await axios
     .put(
-      `${server}/products/${productData._id}`,
+      `${API_URL}/products/${productData._id}`,
       {
         ...productData,
         dateOfExpiration: productData.dateOfExpiration.toISOString(),

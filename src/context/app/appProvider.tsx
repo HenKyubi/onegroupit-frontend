@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useReducer } from "react";
 import { GetProductsResponse } from "../../interfaces/getProductsResponse";
-import { AppState, Product } from "../../interfaces/types";
+import { AppState, Product, userData } from "../../interfaces/types";
 import { AppContext } from "./appContext";
 import { AppReducer } from "./appReducer";
 
@@ -10,24 +10,22 @@ interface props {
 }
 
 const INITIAL_STATE: AppState = {
-  id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  token: "",
+  userData: { id: "", firstName: "", lastName: "", email: "", token: "" },
   productsList: [],
   productsListFiltred: [],
   hasActiveFilters: false,
 };
 
 export const AppProvider = ({ children }: props) => {
-  const server = "http://localhost:5000/api";
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const [appState, dispatch] = useReducer(AppReducer, INITIAL_STATE);
 
-  const getProducts = async (token: string): Promise<{ message: string }> => {
+  const getProducts = async (
+    token: string
+  ): Promise<{ message: string; productsList: Product[] }> => {
     return await axios
-      .get<GetProductsResponse>(`${server}/products`, {
+      .get<GetProductsResponse>(`${API_URL}/products`, {
         headers: {
           "x-access-token": token,
         },
@@ -37,10 +35,10 @@ export const AppProvider = ({ children }: props) => {
           type: "getProducts",
           payload: { productsList: res.data.productsData },
         });
-        return { message: "Success" };
+        return { message: "Success", productsList: res.data.productsData };
       })
       .catch((error) => {
-        return { message: error };
+        return { message: error, productsList: [] };
       });
   };
 
@@ -63,10 +61,15 @@ export const AppProvider = ({ children }: props) => {
     dispatch({ type: "closeSession" });
   };
 
+  const setUserData = (userData: userData) => {
+    dispatch({ type: "setUserData", payload: { userData } });
+  };
+
   return (
     <AppContext.Provider
       value={{
         appState,
+        setUserData,
         getProducts,
         setProductsList,
         setHasFilters,

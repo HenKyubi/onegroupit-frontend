@@ -1,6 +1,7 @@
-import { AppState, Product } from "../../interfaces/types";
+import { AppState, Product, userData } from "../../interfaces/types";
 
 type AppActions =
+  | { type: "setUserData"; payload: { userData: userData } }
   | { type: "setProductsList"; payload: { productsList: Product[] } }
   | {
       type: "setFilterProductsList";
@@ -11,11 +12,7 @@ type AppActions =
   | { type: "closeSession" };
 
 const INITIAL_STATE: AppState = {
-  id: "",
-  firstName: "",
-  lastName: "",
-  email: "",
-  token: "",
+  userData: { id: "", firstName: "", lastName: "", email: "", token: "" },
   productsList: [],
   productsListFiltred: [],
   hasActiveFilters: false,
@@ -23,6 +20,8 @@ const INITIAL_STATE: AppState = {
 
 export const AppReducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
+    case "setUserData":
+      return { ...state, userData: action.payload.userData };
     case "getProducts":
       return { ...state, productsList: action.payload.productsList };
     case "setProductsList":

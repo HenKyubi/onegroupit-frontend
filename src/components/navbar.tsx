@@ -21,12 +21,14 @@ const Navbar = () => {
 
   const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
-  const username = `${appState.firstName} ${appState.lastName}`;
+  const username = `${appState.userData.firstName} ${appState.userData.lastName}`;
 
   const navigate = useNavigate();
 
   const handleCloseSession = () => {
     closeSession();
+    localStorage.removeItem("authData");
+    sessionStorage.removeItem("authData");
     navigate("/login", { replace: true });
   };
 

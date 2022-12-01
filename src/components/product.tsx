@@ -34,8 +34,8 @@ const Product: React.FC<{
   const [days, hours, minutes, seconds] = useCountdown(dateTimeFormated);
 
   const handleDeleteProduct = async () => {
-    await deleteProduct(productData._id, appState.token);
-    await getProducts(appState.token);
+    await deleteProduct(productData._id, appState.userData.token);
+    await getProducts(appState.userData.token);
   };
 
   const handleModifyProduct = async () => {

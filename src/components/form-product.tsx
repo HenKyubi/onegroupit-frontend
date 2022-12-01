@@ -45,11 +45,11 @@ const FormProduct: React.FC<{
         ...data,
         dateOfExpiration: new Date(data.dateOfExpiration),
       },
-      appState.token
+      appState.userData.token
     )
       .then(async (res) => {
         toastSuccess(res.message);
-        await getProducts(appState.token);
+        await getProducts(appState.userData.token);
       })
       .catch((error) => {
         toastError(error.message);
@@ -63,10 +63,10 @@ const FormProduct: React.FC<{
         ...data,
         dateOfExpiration: new Date(data.dateOfExpiration),
       },
-      appState.token
+      appState.userData.token
     )
       .then(async (res) => {
-        await getProducts(appState.token);
+        await getProducts(appState.userData.token);
         toastSuccess(res.message);
         reset();
       })
