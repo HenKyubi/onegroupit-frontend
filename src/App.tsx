@@ -1,34 +1,37 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 //Context
-import { AppProvider } from "./context/app/app-provider";
+import { AppProvider } from "./context/app/appProvider";
 
 //Styles
-import './styles/styles.scss'
+import "./styles/styles.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-// import "./App.scss";
+//Components
+import ProtectedRoutes from "./components/protected-routes";
 
 //Pages
 import PageLogin from "./pages/page-login";
 import PageProducts from "./pages/page-products";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <PageLogin />,
-    },
-    {
-      path: "products",
-      element: <PageProducts />,
-    },
-  ]);
   return (
     <>
       <AppProvider>
-        <RouterProvider router={router} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<PageLogin />} />
+            <Route
+              path="/products"
+              element={
+                <ProtectedRoutes>
+                  <PageProducts />
+                </ProtectedRoutes>
+              }
+            />
+            <Route path="*" element={<Navigate replace to={"/products"} />} />
+          </Routes>
+        </BrowserRouter>
       </AppProvider>
     </>
   );

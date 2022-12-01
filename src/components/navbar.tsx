@@ -1,38 +1,45 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-//Icons
-import { FaSearch, FaPlus, FaBell } from "react-icons/fa";
+//Libs
+import { FaPlus, FaBell, FaPowerOff } from "react-icons/fa";
+
+//Hooks
+import { useModal } from "../hooks/useModal";
 
 //Context
-import { AppContext } from "../context/app/app-context";
+import { AppContext } from "../context/app/appContext";
 
-//Assets
-import userAvatar from "../assets/logo.png";
+//Components
+import FormProduct from "./form-product";
+import Searchbar from "./searchbar";
 
 const Navbar = () => {
-  const { appState } = useContext(AppContext);
+  const { appState, closeSession } = useContext(AppContext);
 
-  const [searchInput, setSearchInput] = useState<string>("");
+  const [toggle, setToggle] = useState<boolean>(false);
 
-  const username = `${appState.firstName} ${appState.lastName}`;
+  const [registerModalIsOpen, setRegisterModalIsOpen] = useModal();
 
-  const handleSearch = (search: string) => {
-    console.log(search);
-    setSearchInput(search);
+  const username = `${appState.userData.firstName} ${appState.userData.lastName}`;
+
+  const navigate = useNavigate();
+
+  const handleCloseSession = () => {
+    closeSession();
+    localStorage.removeItem("authData");
+    sessionStorage.removeItem("authData");
+    navigate("/login", { replace: true });
   };
+
   return (
     <nav id="navbar">
-      <div className="searchbar">
-        <FaSearch />
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchInput}
-          onChange={(e) => handleSearch(e.target.value)}
-        />
-      </div>
+      <Searchbar />
       <div className="navbar__options">
-        <button className="navbar__options-btn-new-product">
+        <button
+          className="navbar__options-btn-new-product"
+          onClick={setRegisterModalIsOpen}
+        >
           <div>
             <FaPlus />
           </div>
@@ -45,9 +52,32 @@ const Navbar = () => {
           <span>{username}</span>
         </div>
         <div className="navbar__options-box-avatar">
-          <img src={userAvatar} alt="name of user avatar" />
+          <div className="dropdown">
+            <img
+              src={"https://placeimg.com/400/400/people"}
+              alt={`${username} avatar`}
+              onClick={() => setToggle(!toggle)}
+            />
+            <div
+              className={`dropdown-content ${toggle && "show"}`}
+              onClick={() => setToggle(!toggle)}
+            >
+              <div
+                className="dropdown-content-item"
+                onClick={handleCloseSession}
+              >
+                <FaPowerOff />
+                <span>Close session</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <FormProduct
+        isOpen={registerModalIsOpen}
+        toggleModal={setRegisterModalIsOpen}
+        action={"create"}
+      />
     </nav>
   );
 };

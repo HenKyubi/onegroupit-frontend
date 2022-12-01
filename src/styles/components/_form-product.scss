@@ -1,0 +1,14 @@
+@use "../variables" as var;
+
+.form__product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: var.$color-primary;
+  }
+  .form__product-box-btn-submit {
+    display: flex;
+    justify-content: center;
+  }
+}

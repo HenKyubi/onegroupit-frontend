@@ -6,6 +6,8 @@
 @forward "components/modal";
 @forward "components/navbar";
 @forward "components/product";
+@forward 'components/form-product';
+@forward 'components/searchbar';
 
 //Pages
 @forward 'pages/page-login';
