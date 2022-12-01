@@ -6,7 +6,7 @@ import { FaMoneyBill, FaStar, FaShoppingBag, FaLink } from "react-icons/fa";
 import { Product, formProduct } from "../interfaces/types";
 
 //API
-import { registerNewProduct, modifyProduct } from "../api";
+import { registerNewProduct, modifyProduct, getProducts } from "../api";
 
 //Components
 import Modal from "./modal";
@@ -36,7 +36,7 @@ const FormProduct: React.FC<{
   const toastSuccess = (message: string) => toast.success(message);
   const toastError = (message: string) => toast.error(message);
 
-  const { appState, getProducts } = useContext(AppContext);
+  const { appState, setProductsList } = useContext(AppContext);
 
   const modifyProductAction = async (data: formProduct) => {
     await modifyProduct(
@@ -49,7 +49,9 @@ const FormProduct: React.FC<{
     )
       .then(async (res) => {
         toastSuccess(res.message);
-        await getProducts(appState.userData.token);
+        await getProducts(appState.userData.token).then((res) => {
+          setProductsList(res.productsList);
+        });
       })
       .catch((error) => {
         toastError(error.message);
@@ -66,7 +68,9 @@ const FormProduct: React.FC<{
       appState.userData.token
     )
       .then(async (res) => {
-        await getProducts(appState.userData.token);
+        await getProducts(appState.userData.token).then((res) => {
+          setProductsList(res.productsList);
+        });
         toastSuccess(res.message);
         reset();
       })

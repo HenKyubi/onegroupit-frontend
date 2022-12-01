@@ -5,7 +5,7 @@ import { FaRegClock, FaRegStar, FaStar, FaPen, FaTrash } from "react-icons/fa";
 import { Product as product } from "../interfaces/types";
 
 //API
-import { deleteProduct } from "../api";
+import { deleteProduct, getProducts } from "../api";
 
 //Hooks
 import { useModal } from "../hooks/useModal";
@@ -21,7 +21,7 @@ const Product: React.FC<{
 }> = ({ productData }) => {
   const [toggle, setToggle] = useState(false);
 
-  const { appState, getProducts } = useContext(AppContext);
+  const { appState, setProductsList } = useContext(AppContext);
 
   const [modifyModalIsOpen, setModifyModalIsOpen] = useModal();
 
@@ -35,7 +35,9 @@ const Product: React.FC<{
 
   const handleDeleteProduct = async () => {
     await deleteProduct(productData._id, appState.userData.token);
-    await getProducts(appState.userData.token);
+    await getProducts(appState.userData.token).then((res) => {
+      setProductsList(res.productsList);
+    });
   };
 
   const handleModifyProduct = async () => {

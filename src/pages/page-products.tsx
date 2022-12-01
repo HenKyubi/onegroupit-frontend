@@ -1,4 +1,4 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 
 //Context
 import { AppContext } from "../context/app/appContext";
@@ -6,40 +6,31 @@ import { AppContext } from "../context/app/appContext";
 //Components
 import Navbar from "../components/navbar";
 import Product from "../components/product";
-import { userData as UserData } from "../interfaces/types";
+import { userData, userData as UserData } from "../interfaces/types";
+import { getProducts } from "../api";
+import Spiner from "../components/spiner";
 
 const PageProducts = () => {
-  const { appState, getProducts, setUserData, setProductsList } =
-    useContext(AppContext);
+  const { appState, setProductsList } = useContext(AppContext);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getSession = (): void => {
+  const getSession = useCallback((): userData => {
     const localSession: string | null = localStorage.getItem("authData");
     const tempSession: string | null = sessionStorage.getItem("authData");
     if (!localSession) {
       const userData: UserData = JSON.parse(tempSession!);
-      setUserData(userData);
+      return userData;
     } else {
       const userData: UserData = JSON.parse(localSession!);
-      setUserData(userData);
+      return userData;
     }
-  };
-
-  // const fetchProducts = async () => {
-  //   await getProducts(appState.userData.token).then((res) => {
-  //     setProductsList(res.productsList);
-  //   });
-  // };
-
-  useLayoutEffect(() => {
-    getSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    getProducts(appState.userData.token).then((res) => {
-      // console.log(res.productsList);
+    const userData = getSession();
+    getProducts(userData.token).then((res) => {
       setProductsList(res.productsList);
       setIsLoading(false);
     });
@@ -59,7 +50,7 @@ const PageProducts = () => {
             alignItems: "center",
           }}
         >
-          Loading
+          <Spiner />
         </div>
       )}
       {!isLoading && (

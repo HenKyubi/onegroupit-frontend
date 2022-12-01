@@ -42,8 +42,6 @@ const FormLogin = () => {
       setUserData(userData);
     } else {
       sessionStorage.setItem("authData", JSON.stringify(userData));
-      const lel = sessionStorage.getItem("authData");
-      console.log(lel);
       setUserData(userData);
     }
   };
@@ -55,7 +53,7 @@ const FormLogin = () => {
           toastError(res.message);
         } else {
           saveSession(data.keepMeSignedIn, res.userData);
-          navigate("/products")
+          navigate("/products", { replace: true });
         }
       })
       .catch((error) => toastError(error));

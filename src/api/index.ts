@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GetProductsResponse } from "../interfaces/getProductsResponse";
 
 import { Product } from "../interfaces/types";
 
@@ -45,6 +46,23 @@ export const registerUser = async (
     })
     .catch((error) => {
       return error.response.data;
+    });
+};
+
+export const getProducts = async (
+  token: string
+): Promise<{ message: string; productsList: Product[] }> => {
+  return await axios
+    .get<GetProductsResponse>(`${API_URL}/products`, {
+      headers: {
+        "x-access-token": token,
+      },
+    })
+    .then((res) => {
+      return { message: "Success", productsList: res.data.productsData };
+    })
+    .catch((error) => {
+      return { message: error, productsList: [] };
     });
 };
 

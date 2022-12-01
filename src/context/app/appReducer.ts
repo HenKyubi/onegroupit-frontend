@@ -7,7 +7,6 @@ type AppActions =
       type: "setFilterProductsList";
       payload: { filterProductsList: Product[] };
     }
-  | { type: "getProducts"; payload: { productsList: Product[] } }
   | { type: "setHasFilters"; payload: { hasFilters: boolean } }
   | { type: "closeSession" };
 
@@ -22,8 +21,6 @@ export const AppReducer = (state: AppState, action: AppActions): AppState => {
   switch (action.type) {
     case "setUserData":
       return { ...state, userData: action.payload.userData };
-    case "getProducts":
-      return { ...state, productsList: action.payload.productsList };
     case "setProductsList":
       return { ...state, productsList: action.payload.productsList };
     case "setFilterProductsList":
