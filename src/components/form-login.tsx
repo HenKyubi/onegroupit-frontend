@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { userData as UserData } from "../interfaces/types";
 
 //Context
 import { AppContext } from "../context/app/appContext";
@@ -8,7 +10,6 @@ import { AppContext } from "../context/app/appContext";
 import { ToastContainer, toast } from "react-toastify";
 
 //Hooks
-import { useForm } from "react-hook-form";
 import { useModal } from "../hooks/useModal";
 
 //API
@@ -16,7 +17,6 @@ import { login } from "../api";
 
 //Components
 import FormRegister from "./form-register";
-import { userData as UserData } from "../interfaces/types";
 
 //Types
 type formLogin = {

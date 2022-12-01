@@ -1,4 +1,8 @@
 import { useContext, useEffect, useState, useCallback } from "react";
+import { userData, userData as UserData } from "../interfaces/types";
+
+//API
+import { getProducts } from "../api";
 
 //Context
 import { AppContext } from "../context/app/appContext";
@@ -6,8 +10,6 @@ import { AppContext } from "../context/app/appContext";
 //Components
 import Navbar from "../components/navbar";
 import Product from "../components/product";
-import { userData, userData as UserData } from "../interfaces/types";
-import { getProducts } from "../api";
 import Spiner from "../components/spiner";
 
 const PageProducts = () => {
