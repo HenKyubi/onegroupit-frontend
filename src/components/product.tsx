@@ -80,11 +80,11 @@ const Product: React.FC<{
               <button className="dropbtn" onClick={() => setToggle(!toggle)}>
                 ፧
               </button>
-              <div
-                className={`dropdown-content ${toggle && "show"}`}
-                onClick={handleModifyProduct}
-              >
-                <div className="dropdown-content-item">
+              <div className={`dropdown-content ${toggle && "show"}`}>
+                <div
+                  className="dropdown-content-item"
+                  onClick={handleModifyProduct}
+                >
                   <FaPen />
                   <span>Edit</span>
                 </div>
